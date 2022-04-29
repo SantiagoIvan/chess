@@ -14,17 +14,6 @@
 # retornar si es posible pasar por todos los casilleros, sin repetir los ya visitados
 
 # pos = (row, col)
-total_moves = 0
-board = [
-    [ '0', '0', '0', '0', '0', '0', '0', '0' ],
-    [ '0', '0', '0', '0', '0', '0', '0', '0' ],
-    [ '0', '0', '0', '0', '0', 'O', '0', '0' ],
-    [ '0', '0', '0', '0', '0', '0', '0', 'O' ],
-    [ '0', '0', '0', '0', '0', '0', '0', '0' ],
-    [ '0', '0', 'O', '0', '0', 'O', '0', '0' ],
-    [ '0', '0', '0', '0', '0', '0', '0', '0' ],
-    [ '0', '0', '0', '0', '0', '0', '0', '0' ]
-]
 
 # Otra forma de saber si esta completo es usando la variable global moves.
 # Yo se que para completar el tablero tengo que hacer 64 movimientos (incluyendo al movimiento inicial)
@@ -32,13 +21,13 @@ board = [
 
 
 def valid_position(pos, chessboard):
-    return pos[0] in range(0,8) and pos[1] in range(0, 8) and chessboard[pos[0]][pos[1]] != 'K'
+    return pos[0] in range(0,len(chessboard)) and pos[1] in range(0, len(chessboard)) and chessboard[pos[0]][pos[1]] != 'K'
 
-def is_board_completed(moves):
+def is_board_completed(chessboard, moves):
     #for i in range(0,8):
     #    for j in range(0,8):
     #        if chessboard[i][j] == 'O': return False
-    return moves == 64
+    return moves == (len(chessboard) ** 2)
 
 def move_up_right(row, col):
     return (row-2, col+1) 
@@ -82,7 +71,7 @@ def can_complete_chessboard_with_knight(current_pos, chessboard, moves):
     moves += 1
     
     # Pregunto si el tablero esta completo, si esta completo, retorno al tablero, y sino, me muevo
-    if is_board_completed(moves): return True
+    if is_board_completed(chessboard, moves): return True
     
     # Ahora invoco esta misma funcion, pero moviendome en todas las direcciones posibles
     if( can_complete_chessboard_with_knight(move_up_right(row, col), chessboard, moves) 
@@ -99,7 +88,16 @@ def can_complete_chessboard_with_knight(current_pos, chessboard, moves):
     moves -= 1
     return False
 
+total_moves = 0
+board = [
+    [ '0', '0', '0', '0', '0', '0', '0', '0' ],
+    [ '0', '0', '0', '0', '0', '0', '0', '0' ],
+    [ '0', '0', '0', '0', '0', 'O', '0', '0' ],
+    [ '0', '0', '0', '0', '0', '0', '0', 'O' ],
+    [ '0', '0', '0', '0', '0', '0', '0', '0' ],
+    [ '0', '0', 'O', '0', '0', 'O', '0', '0' ],
+    [ '0', '0', '0', '0', '0', '0', '0', '0' ],
+    [ '0', '0', '0', '0', '0', '0', '0', '0' ]
+]
 
 print(can_complete_chessboard_with_knight((2,5), board, total_moves))
- 
-

@@ -20,6 +20,7 @@
 # esto es para no volver a revisar el tablero en cada iteracion
 
 
+
 def valid_position(pos, chessboard):
     return pos[0] in range(0,len(chessboard)) and pos[1] in range(0, len(chessboard)) and chessboard[pos[0]][pos[1]] != 'K'
 
@@ -89,15 +90,7 @@ def can_complete_chessboard_with_knight(current_pos, chessboard, moves):
     return False
 
 total_moves = 0
-board = [
-    [ '0', '0', '0', '0', '0', '0', '0', '0' ],
-    [ '0', '0', '0', '0', '0', '0', '0', '0' ],
-    [ '0', '0', '0', '0', '0', 'O', '0', '0' ],
-    [ '0', '0', '0', '0', '0', '0', '0', 'O' ],
-    [ '0', '0', '0', '0', '0', '0', '0', '0' ],
-    [ '0', '0', 'O', '0', '0', 'O', '0', '0' ],
-    [ '0', '0', '0', '0', '0', '0', '0', '0' ],
-    [ '0', '0', '0', '0', '0', '0', '0', '0' ]
-]
+n = 6 # para un tablero de 6x6 se que tiene solucion empezando por el (0,0) y no tarda
+board = [ ['0' for j in range(n) ] for i in range(n)]
 
-print(can_complete_chessboard_with_knight((2,5), board, total_moves))
+print(can_complete_chessboard_with_knight((0,0), board, total_moves))
